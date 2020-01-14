@@ -1,12 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const TerserJSPlugin = require('terser-webpack-plugin');
-// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: path.resolve(__dirname, '../src//index.js'),
   output: {
     filename: '[name].[hash:8].js',
@@ -50,7 +46,6 @@ module.exports = {
     ]
   },
   plugins: [
-    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       filename: 'index.html',
@@ -73,9 +68,10 @@ module.exports = {
   ],
   resolve: {
     modules: [path.resolve('node_modules')],
-    extensions: ['.js', '.vue', '.css', '.scss', '.json'],
+    extensions: ['.js', 'jsx', '.vue', '.css', '.scss', '.json'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      '@component': path.resolve(__dirname, 'src/components')
     }
   }
 };
