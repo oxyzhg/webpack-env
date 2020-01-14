@@ -1,10 +1,28 @@
-$color: #fafafa;
+$priority: (
+  (color: #039a50, level: 0),
+  (color: #c00909, level: 1),
+  (color: #ffab00, level: 2),
+  (color: #3367d6, level: 3),
+  (color: #039a50, level: 4)
+);
 
-body {
-  background: $color;
-  color: royalblue;
+@for $i from 1 through length($priority) {
+  $item: nth($priority, $i);
+  $color: map-get($item, color);
+  $level: map-get($item, level);
+  
+  .from-through-#{$level} {
+    background: $color;
+  }
 }
 
-#app {
-  text-align: center;
+body {
+  background: royalblue;
+
+  @at-root {
+    .box {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }
