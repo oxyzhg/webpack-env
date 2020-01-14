@@ -9,6 +9,7 @@ const base = require('./webpack.config.js');
 
 module.exports = smart(base, {
   mode: 'production',
+  devtool:'cheap-module-source-map',
   plugins: [
     new CleanWebpackPlugin()
     // new MiniCssExtractPlugin({

@@ -37,9 +37,27 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         use: {
           loader: 'url-loader',
+          limit: 10240,
+          fallback: {
+            loader:'file-loader',
+            options:{
+              name:'media/[name].[hash:8].[ext]'
+            }
+          }
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        use:{
+          loader: 'url-loader',
           options: {
-            limit: 200,
-            outputPath: 'img/'
+            limit: 10240,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: 'media/[name].[hash:8].[ext]'
+              }
+            }
           }
         }
       }
@@ -70,8 +88,8 @@ module.exports = {
     modules: [path.resolve('node_modules')],
     extensions: ['.js', 'jsx', '.vue', '.css', '.scss', '.json'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@component': path.resolve(__dirname, 'src/components')
+      '@': path.resolve(__dirname, '../src'),
+      '@component': path.resolve(__dirname, '../src/components')
     }
   }
 };
