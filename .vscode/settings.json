@@ -1,0 +1,15 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 100,
+  "eslint.run": "onSave",
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 100,
+  "files.watcherExclude": {
+    "**/node_modules/*/**": true,
+    "dist": true,
+    "yarn.lock": true
+  }
+}
