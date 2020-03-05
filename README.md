@@ -10,7 +10,7 @@ npm run serve
 npm run build
 ```
 
-### Pageage
+### Package
 
 - `webpack`
 - `webpack-cli`
