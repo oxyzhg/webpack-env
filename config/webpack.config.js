@@ -1,9 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 module.exports = {
-  entry: path.resolve(__dirname, '../src//index.js'),
+  entry: path.resolve(__dirname, '../src/index.js'),
   output: {
     filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, '../dist')
@@ -11,23 +14,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/,
-        use: 'html-withimg-loader'
-      },
-      {
         test: /\.js$/,
         use: [
           'babel-loader', // babel
-          'eslint-loader'
+          'eslint-loader' // eslint
         ],
-        include: path.resolve(__dirname, 'src'),
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'src')
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          // 'style-loader',
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader', // 加前缀
           'sass-loader'
@@ -49,6 +47,10 @@ module.exports = {
         }
       },
       {
+        test: /\.html$/,
+        use: 'html-withimg-loader'
+      },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
         use: {
           loader: 'url-loader',
@@ -67,23 +69,27 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../public/index.html'),
+      title: 'webpack env',
       filename: 'index.html',
+      template: path.resolve(__dirname, '../public/index.html'),
       hash: true,
       minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeAttributeQuotes: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
+        collapseWhitespace: true, // 折叠空白
+        removeComments: true, // 删除注释
+        removeRedundantAttributes: true, // 删除多余属性
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true // 短文档类型
       }
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash:8].css',
       chunkFilename: '[id].css'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     })
   ],
   resolve: {
