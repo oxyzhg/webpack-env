@@ -27,12 +27,12 @@ module.exports = {
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader', // 加前缀
+          'postcss-loader',
           'sass-loader'
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|jpeg|gif)$/i, // 图片文件
         use: {
           loader: 'url-loader',
           options: {
@@ -40,15 +40,28 @@ module.exports = {
             fallback: {
               loader: 'file-loader',
               options: {
-                name: 'media/[name].[hash:8].[ext]'
+                name: 'images/[name].[hash:8].[ext]'
               }
             }
           }
         }
       },
       {
-        test: /\.html$/,
-        use: 'html-withimg-loader'
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, //媒体文件
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10240,
+              fallback: {
+                loader: 'file-loader',
+                options: {
+                  name: 'media/[name].[hash:8].[ext]'
+                }
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
@@ -59,11 +72,15 @@ module.exports = {
             fallback: {
               loader: 'file-loader',
               options: {
-                name: 'media/[name].[hash:8].[ext]'
+                name: 'fonts/[name].[hash:8].[ext]'
               }
             }
           }
         }
+      },
+      {
+        test: /\.html$/,
+        use: 'html-withimg-loader'
       }
     ]
   },
