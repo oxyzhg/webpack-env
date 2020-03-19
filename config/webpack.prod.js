@@ -1,21 +1,25 @@
+const path = require('path');
 const { smart } = require('webpack-merge');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const webpackConfig = require('./webpack.config.js');
 
-const base = require('./webpack.config.js');
-
-module.exports = smart(base, {
+module.exports = smart(webpackConfig, {
   mode: 'production',
-  devtool:'cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   plugins: [
-    new CleanWebpackPlugin()
-    // new MiniCssExtractPlugin({
-    //   filename: '[name].[hash:8].css',
-    //   chunkFilename: '[id].css'
-    // })
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist')
+      }
+    ]),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash:8].css',
+      chunkFilename: 'css/[id].[hash:8].css'
+    })
   ],
   optimization: {
     minimize: true,
@@ -24,7 +28,14 @@ module.exports = smart(base, {
       new OptimizeCSSAssetsPlugin({}) // 压缩 css
     ],
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: 'initial' // 只打包初始时依赖的第三方
+        },
         styles: {
           name: 'styles',
           test: /\.css$/,

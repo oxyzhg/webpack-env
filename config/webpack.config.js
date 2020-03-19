@@ -2,14 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === 'development';
+const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: {
+    main: path.resolve(__dirname, '../src/index.js')
+  },
   output: {
-    filename: '[name].[hash:8].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'js/[name].[hash:8].js',
+    chunkFilename: 'js/[name].[hash:8].js'
   },
   module: {
     rules: [
@@ -20,12 +24,14 @@ module.exports = {
           'eslint-loader' // eslint
         ],
         exclude: /node_modules/,
-        include: path.resolve(__dirname, 'src')
+        include: path.resolve(__dirname, '../src')
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
+          },
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -85,6 +91,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'webpack env',
       filename: 'index.html',
@@ -99,10 +106,10 @@ module.exports = {
         useShortDoctype: true // 短文档类型
       }
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash:8].css',
-      chunkFilename: '[id].css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: devMode ? '[name].css' : '[name].[hash:8].css',
+    //   chunkFilename: devMode ? '[id].css' : '[id].[hash:8].css'
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
@@ -110,11 +117,9 @@ module.exports = {
     })
   ],
   resolve: {
-    modules: [path.resolve('node_modules')],
-    extensions: ['.js', 'jsx', '.vue', '.css', '.scss', '.json'],
     alias: {
-      '@': path.resolve(__dirname, '../src'),
-      '@component': path.resolve(__dirname, '../src/components')
-    }
+      '@': path.resolve(__dirname, '../src')
+    },
+    extensions: ['*', '.js', 'jsx', '.vue', '.css', '.scss', '.json']
   }
 };

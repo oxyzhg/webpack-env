@@ -1,8 +1,9 @@
-const { smart } = require('webpack-merge');
-const base = require('./webpack.config.js');
 const webapck = require('webpack');
+const { smart } = require('webpack-merge');
 
-module.exports = smart(base, {
+const webpackConfig = require('./webpack.config.js');
+
+module.exports = smart(webpackConfig, {
   mode: 'development',
   devServer: {
     port: 7001,
@@ -13,7 +14,7 @@ module.exports = smart(base, {
     hot: true
   },
   plugins:[
-    new Webpack.HotModuleReplacementPlugin()
+    new webapck.HotModuleReplacementPlugin()
   ],
   devtool: 'source-map',
   watch: true,
