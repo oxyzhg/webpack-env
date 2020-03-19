@@ -6,13 +6,16 @@
   "scripts": {
     "serve": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
+    "compiler": "babel src -d lib --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.0",
     "@babel/plugin-proposal-class-properties": "^7.8.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/polyfill": "^7.8.0",
     "@babel/preset-env": "^7.8.2",
     "@babel/runtime": "^7.8.0",
