@@ -4,7 +4,7 @@
   "description": "webpack develop env.",
   "main": "index.js",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "compiler": "babel src -d lib --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
