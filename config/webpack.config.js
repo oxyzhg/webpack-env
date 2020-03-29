@@ -3,17 +3,17 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+// 自定义配置
+const paths = require('./paths');
 const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, '../src/index.js')
+    main: paths.appIndex
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].[hash:8].js',
-    chunkFilename: 'js/[name].[hash:8].js'
+    path: paths.appDist,
+    filename: 'js/[name].[hash:8].js'
   },
   module: {
     rules: [
@@ -24,7 +24,7 @@ module.exports = {
           'eslint-loader' // eslint
         ],
         exclude: /node_modules/,
-        include: path.resolve(__dirname, '../src')
+        include: paths.appSrc
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -95,7 +95,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'webpack env',
       filename: 'index.html',
-      template: path.resolve(__dirname, '../public/index.html'),
+      template: paths.appIndexTemplate,
       hash: true,
       minify: {
         collapseWhitespace: true, // 折叠空白
@@ -118,7 +118,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '../src')
+      '@': paths.appSrc
     },
     extensions: ['*', '.js', 'jsx', '.vue', '.css', '.scss', '.json']
   }

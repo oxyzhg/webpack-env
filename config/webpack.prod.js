@@ -8,7 +8,6 @@ const webpackConfig = require('./webpack.config.js');
 
 module.exports = smart(webpackConfig, {
   mode: 'production',
-  devtool: 'cheap-module-source-map',
   plugins: [
     new CopyWebpackPlugin([
       {
@@ -17,7 +16,7 @@ module.exports = smart(webpackConfig, {
       }
     ]),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:8].css',
+      filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[id].[hash:8].css'
     })
   ],

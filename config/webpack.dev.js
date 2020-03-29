@@ -16,7 +16,7 @@ module.exports = smart(webpackConfig, {
   plugins:[
     new webapck.HotModuleReplacementPlugin()
   ],
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   watch: true,
   watchOptions: {
     poll: 1000,
