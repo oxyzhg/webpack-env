@@ -39,6 +39,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i, // 图片文件
+        include: paths.appSrc,
+        exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           options: {
@@ -54,6 +56,8 @@ module.exports = {
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, //媒体文件
+        include: paths.appSrc,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
@@ -71,6 +75,8 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        include: paths.appSrc,
+        exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           options: {
