@@ -3,7 +3,7 @@ const { smart } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpackConfig = require('./webpack.config.js');
 
 module.exports = smart(webpackConfig, {
@@ -23,7 +23,7 @@ module.exports = smart(webpackConfig, {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserJSPlugin({}), // 压缩 js
+      new TerserPlugin({}), // 压缩 js
       new OptimizeCSSAssetsPlugin({}) // 压缩 css
     ],
     splitChunks: {

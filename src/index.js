@@ -1,12 +1,12 @@
 import './style.scss';
+import Mypromise from './promise';
 
-const map = new Map([
-  ['name', 'jack'],
-  ['age', 18]
-]);
-const arr = [...map.entries()];
-console.log(arr);
+const promise1 = new Mypromise(resolve => {
+  setTimeout(() => {
+    resolve('settimeout:1000');
+  }, 1000);
+});
 
-console.log('====================================');
-console.log(1212);
-console.log('====================================');
+promise1.then(res => {
+  console.log(res);
+});

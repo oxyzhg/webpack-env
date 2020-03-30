@@ -118,8 +118,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      '@': paths.appSrc
+      '@': paths.appSrc,
+      '@components': path.resolve(paths.appSrc, './components')
     },
-    extensions: ['*', '.js', 'jsx', '.vue', '.css', '.scss', '.json']
+    extensions: ['*', '.js', 'jsx', '.ts', '.vue', 'json', '.css', '.scss']
   }
 };
