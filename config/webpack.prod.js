@@ -1,18 +1,18 @@
-const path = require('path');
 const { smart } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpackConfig = require('./webpack.config.js');
+const paths = require('./paths');
 
 module.exports = smart(webpackConfig, {
   mode: 'production',
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../public'),
-        to: path.resolve(__dirname, '../dist')
+        from: paths.appPublic,
+        to: paths.appDist
       }
     ]),
     new MiniCssExtractPlugin({
@@ -23,7 +23,24 @@ module.exports = smart(webpackConfig, {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin({}), // 压缩 js
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          parser: {
+            ecma: 8
+          },
+          compress: {
+            ecma: 5,
+            warnings: false
+          },
+          output: {
+            ecma: 5,
+            comments: false
+          },
+          ie8: false,
+          warnings: false
+        }
+      }), // 压缩 js
       new OptimizeCSSAssetsPlugin({}) // 压缩 css
     ],
     splitChunks: {
