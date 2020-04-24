@@ -20,5 +20,5 @@ module.exports = {
   // entry:main
   appIndex: resolveApp('./src/index.js'),
   // output:main template
-  appIndexTemplate: resolveApp('./public/index.html')
+  appIndexTemplate: resolveApp('./public/index.html'),
 };

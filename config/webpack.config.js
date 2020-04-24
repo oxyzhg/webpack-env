@@ -5,15 +5,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // 自定义配置
 const paths = require('./paths');
+
 const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: {
-    main: paths.appIndex
+    main: paths.appIndex,
   },
   output: {
     path: paths.appDist,
-    filename: 'js/[name].[hash:8].js'
+    filename: 'js/[name].[hash:8].js',
   },
   module: {
     rules: [
@@ -21,21 +22,21 @@ module.exports = {
         test: /\.js$/,
         use: [
           'babel-loader', // babel
-          'eslint-loader' // eslint
+          'eslint-loader', // eslint
         ],
         exclude: /node_modules/,
-        include: paths.appSrc
+        include: paths.appSrc,
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
-            loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
+            loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           },
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i, // 图片文件
@@ -48,14 +49,14 @@ module.exports = {
             fallback: {
               loader: 'file-loader',
               options: {
-                name: 'images/[name].[hash:8].[ext]'
-              }
-            }
-          }
-        }
+                name: 'images/[name].[hash:8].[ext]',
+              },
+            },
+          },
+        },
       },
       {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, //媒体文件
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, // 媒体文件
         include: paths.appSrc,
         exclude: /node_modules/,
         use: [
@@ -66,12 +67,12 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'media/[name].[hash:8].[ext]'
-                }
-              }
-            }
-          }
-        ]
+                  name: 'media/[name].[hash:8].[ext]',
+                },
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
@@ -84,17 +85,17 @@ module.exports = {
             fallback: {
               loader: 'file-loader',
               options: {
-                name: 'fonts/[name].[hash:8].[ext]'
-              }
-            }
-          }
-        }
+                name: 'fonts/[name].[hash:8].[ext]',
+              },
+            },
+          },
+        },
       },
       {
         test: /\.html$/,
-        use: 'html-withimg-loader'
-      }
-    ]
+        use: 'html-withimg-loader',
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -109,8 +110,8 @@ module.exports = {
         removeRedundantAttributes: true, // 删除多余属性
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true // 短文档类型
-      }
+        useShortDoctype: true, // 短文档类型
+      },
     }),
     // new MiniCssExtractPlugin({
     //   filename: devMode ? '[name].css' : '[name].[hash:8].css',
@@ -118,15 +119,15 @@ module.exports = {
     // }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-      }
-    })
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
   ],
   resolve: {
     alias: {
       '@': paths.appSrc,
-      '@components': path.resolve(paths.appSrc, './components')
+      '@components': path.resolve(paths.appSrc, './components'),
     },
-    extensions: ['*', '.js', 'jsx', '.ts', '.vue', 'json', '.css', '.scss']
-  }
+    extensions: ['*', '.js', 'jsx', '.ts', '.vue', 'json', '.css', '.scss'],
+  },
 };

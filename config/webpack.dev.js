@@ -11,16 +11,14 @@ module.exports = smart(webpackConfig, {
     compress: true,
     contentBase: '../dist/',
     open: false,
-    hot: true
+    hot: true,
   },
-  plugins:[
-    new webapck.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webapck.HotModuleReplacementPlugin()],
   devtool: 'cheap-module-source-map',
   watch: true,
   watchOptions: {
     poll: 1000,
     aggregateTimeout: 500, // debounce
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 });
