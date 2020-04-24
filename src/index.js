@@ -1,12 +1,14 @@
+import { pick } from 'lodash-es';
 import './style.scss';
-import Mypromise from './promise';
 
-const promise1 = new Mypromise(resolve => {
-  setTimeout(() => {
-    resolve('settimeout:1000');
-  }, 1000);
-});
+const obj = {
+  name: 'moggo',
+  tag: 'v1.10',
+  file: 'file1.ext',
+};
 
-promise1.then(res => {
-  console.log(res);
-});
+const ret = pick(obj, ['name', 'tag']);
+
+console.log(ret);
+
+document.body.innerHTML = ret;

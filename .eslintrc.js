@@ -1,22 +1,42 @@
+const OFF = 'off';
+const WARN = 'warn';
+const ERROR = 'error';
+
 module.exports = {
   root: true,
   env: {
+    browser: true,
     node: true,
+    commonjs: true,
     es6: true,
-    browser: true
   },
-  extends: 'eslint:recommended',
+  extends: [
+    'airbnb-base',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/standard',
+    'prettier/react',
+    'prettier/vue',
+  ],
   rules: {
-    'no-console': 0
+    'no-console': OFF,
+    'no-underscore-dangle': OFF,
+    'no-cond-assign': WARN,
+    'no-plusplus': WARN,
+    'no-trailing-spaces': ERROR,
+    'no-restricted-syntax': OFF,
+    'prefer-const': OFF,
   },
+  parser: 'babel-eslint',
   parserOptions: {
-    parser: 'babel-eslint',
-    ecmaVersion: 6,
+    ecmaVersion: 2019,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      modules: true,
-      experimentalObjectRestSpread: true
-    }
-  }
+      globalReturn: false,
+      impliedStrict: true,
+      experimentalObjectRestSpread: true,
+    },
+    allowImportExportEverywhere: false,
+  },
 };

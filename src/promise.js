@@ -105,7 +105,6 @@ class Mypromise {
           rejected(_value);
           break;
         default:
-          return;
       }
     });
   }
