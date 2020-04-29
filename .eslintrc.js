@@ -13,5 +13,6 @@ module.exports = _.merge(require('@dotlim/eslint-config').eslint, {
     'no-trailing-spaces': ERROR,
     'no-restricted-syntax': OFF,
     'prefer-const': OFF,
+    'no-param-reassign': OFF,
   },
 });

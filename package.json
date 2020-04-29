@@ -31,6 +31,7 @@
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -49,6 +50,7 @@
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
