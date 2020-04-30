@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.base');
 const paths = require('./paths');
 
 module.exports = smart(webpackConfig, {
