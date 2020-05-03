@@ -1,7 +1,7 @@
 const webapck = require('webpack');
 const { smart } = require('webpack-merge');
 
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.base');
 
 module.exports = smart(webpackConfig, {
   mode: 'development',
