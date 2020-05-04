@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
-    "local": "webpack --config config/webpack.config.js",
+    "build:dll": "webpack --config config/webpack.config.dll.js",
+    "build:local": "webpack --config config/webpack.config.js",
     "compiler": "babel src -d lib --watch"
   },
   "author": "oxyzhg <oxyzhg@163.com>",

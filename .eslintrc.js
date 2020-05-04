@@ -6,14 +6,14 @@ const ERROR = 'error';
 
 module.exports = _.merge(require('@dotlim/eslint-config').eslint, {
   rules: {
-    'no-console': OFF,
     'no-cond-assign': WARN,
-    'no-nested-ternary': OFF,
+    'no-console': OFF,
+    'no-param-reassign': OFF,
     'no-plusplus': WARN,
-    'no-trailing-spaces': ERROR,
+    'no-unused-vars': WARN,
     'no-restricted-syntax': OFF,
+    'no-trailing-spaces': ERROR,
     'no-underscore-dangle': OFF,
     'prefer-const': OFF,
-    'no-param-reassign': OFF,
   },
 });
