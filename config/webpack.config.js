@@ -39,14 +39,11 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
       loader: require.resolve('postcss-loader'),
       options: {},
     },
-    {
-      loader: require.resolve('sass-loader'),
-    },
   ].filter(Boolean);
 
   if (preProcessor) {
     loaders.push({
-      loader: preProcessor,
+      loader: require.resolve(preProcessor),
       options: {
         sourceMap: true,
       },
